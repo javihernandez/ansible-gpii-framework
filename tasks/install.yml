@@ -1,0 +1,8 @@
+---
+- name: Install application related RPM packages on Fedora
+  dnf:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ gpii_framework_rpm_packages }}"
+  when: (is_fedora) and (gpii_framework_rpm_packages)
+

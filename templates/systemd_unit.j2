@@ -1,0 +1,11 @@
+[Unit]
+Description=Orca Screen Reader
+
+[Service]
+ExecStart={{ gpii_framework_orca_path }}
+Environment=DISPLAY=:0
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target
