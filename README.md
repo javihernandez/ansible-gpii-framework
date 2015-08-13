@@ -45,4 +45,9 @@ Here is an example playbook that uses this role:
     nodejs_app_start_script: gpii.js
     nodejs_app_install_dir: /home/vagrant/gpii-framework
     nodejs_app_git_clone: false
+
+  roles:
+    - facts
+    - nodejs
+    - gpii-framework
 ```
