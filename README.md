@@ -1,6 +1,6 @@
 # GPII Framework Ansible Role
 
-This role automates the provisioning of the [GPII Framework](https://github.com/gpii/linux) on Fedora. It relies heavily on a [Node.js role](https://github.com/avtar/ansible-nodejs) to do most of its work.
+This role automates the provisioning of the [GPII Framework](https://github.com/gpii/linux) on Fedora. It relies heavily on a [Node.js role](https://github.com/idi-ops/ansible-nodejs) to do most of its work.
 
 The GPII Framework tests require that the ``~/.local/share/orca`` directory exists. Currently this role ensures that Orca is started at least once so that the Orca directory is created before any tests are run.
 
@@ -12,8 +12,8 @@ Please refer to the [defaults/main.yml](https://github.com/avtar/ansible-gpii-fr
 
 The following roles are required:
 
-*  [facts](https://github.com/avtar/ansible-facts/)
-*  [nodejs](https://github.com/avtar/ansible-nodejs/)
+*  [facts](https://github.com/idi-ops/ansible-facts/)
+*  [nodejs](https://github.com/idi-ops/ansible-nodejs/)
 
 ## Example
 
