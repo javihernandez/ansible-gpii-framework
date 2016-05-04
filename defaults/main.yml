@@ -3,10 +3,6 @@
 gpii_framework_rpm_packages:
   - orca
 
-# Absolute path to Orca, used temporarily by the systemd unit to start and stop
-# Orca so that the ~/.local/share/orca directory gets created.
-gpii_framework_orca_path: /usr/bin/orca
-
 # The user and group that will own the temporary systemd unit config.
 gpii_framework_username: vagrant
 gpii_framework_groupname: vagrant

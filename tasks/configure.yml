@@ -1,63 +1,28 @@
 ---
-# The GPII framework tests on Fedora require that Orca has been set up and the
-# ~/.local/share/orca directory exists. The following tasks will:
-#  * Check if the Orca user directory exists, if it does the remaining tasks will be skipped
-#  * Start Orca as the user who will be using the framework and/or running tests
-#  * Let Orca create its files in the user's home directory and test for their presence
-#  * Stop Orca
+# The GPII framework tests on Fedora require that Orca has been set up.
 
 - name: Check to see if the Orca user directory exists
   stat:
     path: "{{ gpii_framework_user_home_dir }}/.local/share/orca"
   register: gpii_framework_orca_dir_result
 
-- name: Ensure systemd user related directory exists
+- name: Create Orca user directory if required
   file:
-    path: "{{ gpii_framework_user_home_dir }}/.config/systemd/user/"
+    path: "{{ gpii_framework_user_home_dir }}/.local/share/orca"
     state: directory
     mode: 0755
     owner: "{{ gpii_framework_username }}"
     group: "{{ gpii_framework_groupname }}"
   when: gpii_framework_orca_dir_result.stat.exists == false
     
-- name: Create Orca systemd user unit
-  template:
-    src: systemd_unit.j2
-    dest: "{{ gpii_framework_user_home_dir }}/.config/systemd/user/orca.service"
+- name: Create Orca configuration file
+  copy:
+    src: orca-user-settings.conf
+    dest: "{{ gpii_framework_user_home_dir }}/.local/share/orca/user-settings.conf"
     owner: "{{ gpii_framework_username }}"
     group: "{{ gpii_framework_groupname }}"
   when: gpii_framework_orca_dir_result.stat.exists == false
   
-- name: Start Orca
-  service:
-    name: orca.service
-    state: started
-    args: --user
-  become: yes
-  become_user: "{{ gpii_framework_username }}"
-  when: gpii_framework_orca_dir_result.stat.exists == false
-  
-- name: Verify Orca user directory exists
-  wait_for: 
-    path: "{{ gpii_framework_user_home_dir }}/.local/share/orca"
-    timeout: 300
-  when: gpii_framework_orca_dir_result.stat.exists == false
-  
-- name: Stop Orca
-  service:
-    name: orca.service
-    state: stopped
-    args: --user
-  become: yes
-  become_user: "{{ gpii_framework_username }}"
-  when: gpii_framework_orca_dir_result.stat.exists == false
-  
-- name: Remove Orca systemd user unit
-  file:
-    path: "{{ gpii_framework_user_home_dir }}/.config/systemd/user/orca.service"
-    state: absent
-  when: gpii_framework_orca_dir_result.stat.exists == false
-
 # gpii/universal gets installed to the parent node_modules directory relative to gpii/linux
 # https://github.com/GPII/grunt-gpii/blob/master/tasks/gpii.js#L25
 #

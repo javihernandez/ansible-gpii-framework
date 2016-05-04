@@ -2,7 +2,7 @@
 
 This role automates the provisioning of the [GPII Framework](https://github.com/gpii/linux) on Fedora. It relies heavily on a [Node.js role](https://github.com/idi-ops/ansible-nodejs) to do most of its work.
 
-The GPII Framework tests require that the ``~/.local/share/orca`` directory exists. Currently this role ensures that Orca is started at least once so that the Orca directory is created before any tests are run.
+The GPII Framework tests require an Orca ``~/.local/share/orca/user-settings.conf`` file exists. This role includes a config shipped with Orca 3.16 and copies it to the mentioned location.
 
 ## Role Variables
 
