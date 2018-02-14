@@ -2,15 +2,3 @@
 # A YAML list of RPM packages that the application requires.
 gpii_framework_rpm_packages:
   - orca
-
-# The user and group that will own the temporary systemd unit config.
-gpii_framework_username: vagrant
-gpii_framework_groupname: vagrant
-
-# Used to check for the Orca directory and temporarily store the systemd unit.
-gpii_framework_user_home_dir: /home/vagrant
-
-# Boolean that gets set if the Orca user directory doesn't exist. If it doesn't
-# then all the Orca related tasks will run.
-gpii_framework_orca_dir_result: false
-
